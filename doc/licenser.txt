@@ -1,0 +1,7 @@
+*licenser.txt*  Insert license header automatically for new files
+
+Author:  Kirill (g4s8) <https://github.com/g4s8>
+License: MIT
+
+ vim:tw=78:et:ft=help:norl:
+
