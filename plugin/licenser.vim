@@ -112,7 +112,7 @@ fun! licenser#InsertLicense(license, fmt)
   endif
   let l:pos = 0
   if has_key(fmt, 'start')
-    call append(pos, '/*')
+    call append(pos, fmt['start'])
     let l:pos += 1
   endif
   for lic_line in readfile(license)
@@ -124,7 +124,7 @@ fun! licenser#InsertLicense(license, fmt)
     let l:pos += 1
   endfor
   if has_key(fmt, 'end')
-    call append(pos, ' */')
+    call append(pos, fmt['end'])
   endif
 endfun
 
