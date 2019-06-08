@@ -3,5 +3,9 @@
 Author:  Kirill (g4s8) <https://github.com/g4s8>
 License: MIT
 
- vim:tw=78:et:ft=help:norl:
-
+This plugin automatically insert license header comment if find it
+in project root, it's looking for LICENSE and LICENSE.txt file.
+For now supported formats are: `java`, `bash`, `sh`, `yaml`, `yml`,
+`py`. If you want to add support for another file type, submit a ticlet
+and explain what format should be used for file type:
+https://github.com/g4s8/vim-licenser/issues
