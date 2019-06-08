@@ -44,6 +44,11 @@ if !exists('g:licenser#format')
       \ 'line': '" ',
       \ 'empty_line': '"',
     \ },
+    \ 'yaml': {
+      \ 'line': '# ',
+      \ 'empty_line': '#',
+      \ 'end': '---',
+    \ },
   \ }
 endif
 
@@ -73,8 +78,14 @@ fun! licenser#FindAndInsert()
   if ext == 'sh'
     let l:ext = 'bash'
   endif
+  if ext == 'yml'
+    let l:ext = 'yaml'
+  endif
+  call licenser#Debug("Searching format for filetype: " . ext)
   if !has_key(g:licenser#format, ext)
-    return
+    call licenser#Debug("Format `" . ext . "` was not found;"
+      \ . " supported formats: " . string(keys(g:licenser#format)))
+    return 0
   endif
   let l:fmt = g:licenser#format[ext]
   let l:success = 0
@@ -121,3 +132,5 @@ augroup licenser#newbuf
   au!
   au BufNewFile * call licenser#FindAndInsert()
 augroup END
+
+call licenser#Debug('plugin loaded')
