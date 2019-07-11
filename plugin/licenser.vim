@@ -52,6 +52,15 @@ if !exists('g:licenser#format')
   \ }
 endif
 
+" File type aliases
+if !exists('g:licenser#aliases')
+  let g:licenser#aliases = {
+        \ 'yml': 'yaml',
+        \ 'bash': 'sh',
+        \ 'zsh': 'sh',
+  \ }
+endif
+
 " Enable debugging
 if !exists('g:licenser#debug')
   let g:licenser#debug = 0
@@ -75,11 +84,8 @@ endif
 " Find license and insert if found
 fun! licenser#FindAndInsert()
   let l:ext = expand('%:e')
-  if ext == 'sh'
-    let l:ext = 'bash'
-  endif
-  if ext == 'yml'
-    let l:ext = 'yaml'
+  if has_key(g:licenser#aliases, ext)
+    let l:ext = g:licenser#aliases[ext]
   endif
   call licenser#Debug("Searching format for filetype: " . ext)
   if !has_key(g:licenser#format, ext)
@@ -104,7 +110,7 @@ fun! licenser#InsertLicense(license, fmt)
   let l:license = a:license "license file name
   let l:fmt = a:fmt "license format
   call licenser#Debug(
-    \ "InsertLicense() licenser=" . license .
+    \ "InsertLicense() license=" . license .
     \ " fmt=".string(fmt)
   \ )
   if empty(fmt)
@@ -128,9 +134,10 @@ fun! licenser#InsertLicense(license, fmt)
   endif
 endfun
 
-augroup licenser#newbuf
+augroup licenser
   au!
   au BufNewFile * call licenser#FindAndInsert()
+  au BufRead * if getfsize(expand('%'))==0|call licenser#FindAndInsert()|endif
 augroup END
 
 call licenser#Debug('plugin loaded')
