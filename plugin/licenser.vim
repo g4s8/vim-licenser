@@ -51,7 +51,7 @@ if !exists('g:licenser#format')
     \ },
     \ 'js': {
       \ 'start': '/*',
-      \ 'end': '*/',
+      \ 'end': ' */',
       \ 'line': ' * ',
       \ 'empty_line': ' *',
     \ },
