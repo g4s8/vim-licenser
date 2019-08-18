@@ -49,6 +49,12 @@ if !exists('g:licenser#format')
       \ 'empty_line': '#',
       \ 'end': '---',
     \ },
+    \ 'js': {
+      \ 'start': '/*',
+      \ 'end': '*/',
+      \ 'line': ' * ',
+      \ 'empty_line': ' *',
+    \ },
   \ }
 endif
 
